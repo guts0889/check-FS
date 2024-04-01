@@ -1,3 +1,32 @@
+#!/bin/bash
+#Rev9
+
+R='\033[0;31m'  #Rojo
+V='\033[0;32m'  #Verde
+AM='\033[1;33m' #Amarillo
+AZ='\033[0;34m' #Azul
+MM='\033[1;35m' #Magenta
+S='\033[0m'     #Quita color
+
+#Comprueba que el script tiene todos los argumentos necesarios para funcionar.
+if [ "$#" -ne 2 ]; then
+    echo -e "${MM}Uso: $0 [Porcentaje de uso mínimo 0-100] [Número de lineas a mostrar]${S}"
+    exit 1
+fi
+
+#Comprueba que el primer argumento esta bien escrito.
+if ! [[ $1 =~ ^[0-9]+$ ]] || [ "$1" -lt 0 ] || [ "$1" -gt 100 ]; then
+    echo -e "${MM}El primer argumento debe ser un porcentaje de uso mínimo entre 0 y 100.${S}"
+    exit 1
+fi
+
+#Comprueba que el segundo argumento esta bien escrito.
+if ! [[ $2 =~ ^[0-9]+$ ]] || [ "$2" -lt 1 ]; then
+    echo -e "${MM}El segundo argumento debe ser un número positivo que indica cuántos archivos mostrar.${S}"
+    exit 1
+fi
+
+#Variables que se asgignan a los valores dados al lanzar el script.
 porcentaje=$1
 nlineas=$2
 encontrado=0
